@@ -88,8 +88,7 @@ $app->get('/check', function () use ($app) {
     $body = "Byl změněn stav převaděče.\r\n" .
             "Call: ";
 
-    foreach ($echolinksys->messageEmail as $email) {
-        var_dump($email);die;
+    foreach ($echolinksys->messageEmail as $email) { 
         //set template for email!
         $body = "Byl změněn stav převaděče.\r\n" .
                 "Call: " . $email["callname"] . "\r\n" .
