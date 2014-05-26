@@ -10,12 +10,12 @@ use Slim\Views\TwigExtension;
 
 require './vendor/autoload.php';
 
-define("masterPassword", "heslo456", true);
+define("masterPassword", "heslotvoje", true);
 
-define("host", "wm58.wedos.net", true);
-define("username", "a41905_echocr", true);
-define("password", "s82shwc8", true);
-define("database", "d41905_echocr", true);
+define("host", "localhost", true);
+define("username", "name", true);
+define("password", "pass", true);
+define("database", "dbname", true);
 
 
 
@@ -84,15 +84,13 @@ $app->get('/check', function () use ($app) {
 
     $echolinksys->dataFromTheServer();
     $app->log->info("Echolink CRON System - Update was performed from a remote server echolink.org");
-
-    $body = "Byl změněn stav převaděče.\r\n" .
-            "Call: ";
+ 
 
     foreach ($echolinksys->messageEmail as $email) { 
         //set template for email!
         $body = "Byl změněn stav převaděče.\r\n" .
                 "Call: " . $email["callname"] . "\r\n" .
-                "Nyní stav: " . $email["newStatus"] . "\r\n" .
+                "Nyní stav: " . ($email["newStatus"]==1?"Online":"Offline") . "\r\n" .
                 "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
                 "Datum nynější změny: " . $email["checkDate"] . "\r\n";
 
