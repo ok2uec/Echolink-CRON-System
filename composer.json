@@ -1,7 +1,7 @@
 {
     "name": "ok2uec/echolink-cron-system",
     "description": "The system for monitoring EchoLink via cron",
-    "keywords": ["microframework", "rest", "router"],
+    "keywords": ["microframework", "rest", "echolink","ok2uec"],
     "homepage": "http://github.com/codeguy/Slim-Skeleton",
     "license": "MIT",
     "authors": [
@@ -19,13 +19,7 @@
         "twig/twig": "1.*",
         "centralapps/pdo": "dev-master",
         "ok2uec/echolinksys": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:ok2uec/EcholinkSys.git"
-        }
-    ]
+    }
      
     
 }
