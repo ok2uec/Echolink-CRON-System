@@ -113,6 +113,19 @@ $app->get('/cron', function () use ($app) {
     $echolinksys->dataFromTheServer();
     $app->log->info("Echolink CRON System - CRON -> Update was performed from a remote server echolink.org");
 
+    foreach ($echolinksys->messageEmail as $email) { 
+        //set template for email!
+        $body = "Byl změněn stav převaděče.\r\n" .
+                "Call: " . $email["callname"] . "\r\n" .
+                "Nyní stav: " . ($email["newStatus"]==1?"Online":"Offline") . "\r\n" .
+                "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
+                "Datum nynější změny: " . $email["checkDate"] . "\r\n";
+
+        $echolinksys->mail($email["email"], "Echolink", $body, $from_name = "EcholinkSyS");
+        $echolinksys->addHistoryLog("E-mail send to " . $email["callname"]);
+        $app->log->info("Echolink CRON System - Email send to " . $email["callname"]);
+    }
+    
     $dataArray = array('time' => time(), 'message' => "Run finish");
 
     header("Content-Type: application/json");
