@@ -74,5 +74,8 @@ used for adding and removing smugglers from the system.
     #index.php
     define("masterPassword", "youpassword456", true);
 
-
+![alt tag](https://raw.githubusercontent.com/ok2uec/Echolink-CRON-System/master/screenshot/1.png)
+ 
+![alt tag](https://raw.githubusercontent.com/ok2uec/Echolink-CRON-System/master/screenshot/2.png)
+ 
 
