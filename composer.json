@@ -23,7 +23,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:smoce/echolinksys.git"
+            "url": "git@github.com:ok2uec/EcholinkSys.git"
         }
     ]
      
