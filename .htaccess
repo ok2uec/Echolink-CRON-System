@@ -1,0 +1,10 @@
+RewriteEngine On
+#RewriteBase /
+
+
+RewriteCond %{REQUEST_URI} ^(?!/media/).+ [NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+ 
