@@ -10,7 +10,7 @@ use Slim\Views\TwigExtension;
 
 require './vendor/autoload.php';
 
-define("masterPassword", "heslotvoje", true);
+define("masterPassword", "heslo456", true);
 
 define("host", "localhost", true);
 define("username", "name", true);
@@ -84,13 +84,20 @@ $app->get('/check', function () use ($app) {
 
     $echolinksys->dataFromTheServer();
     $app->log->info("Echolink CRON System - Update was performed from a remote server echolink.org");
- 
 
-    foreach ($echolinksys->messageEmail as $email) { 
+    if ($echolinksys->responseStat != System::RESPONSE_OK) {
+        $app->log->info("Echolink CRON System - Server problem ! (CODE: " . $echolinksys->responseStat . ")");
+        $echolinksys->addHistoryLog("Server response problem! (CODE: " . $echolinksys->responseStat . ")");
+    }
+
+    $body = "Byl změněn stav převaděče.\r\n" .
+            "Call: ";
+
+    foreach ($echolinksys->messageEmail as $email) {
         //set template for email!
         $body = "Byl změněn stav převaděče.\r\n" .
                 "Call: " . $email["callname"] . "\r\n" .
-                "Nyní stav: " . ($email["newStatus"]==1?"Online":"Offline") . "\r\n" .
+                "Nyní stav: " . ($email["newStatus"] == 1 ? "true" : "false") . "\r\n" .
                 "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
                 "Datum nynější změny: " . $email["checkDate"] . "\r\n";
 
@@ -113,19 +120,12 @@ $app->get('/cron', function () use ($app) {
     $echolinksys->dataFromTheServer();
     $app->log->info("Echolink CRON System - CRON -> Update was performed from a remote server echolink.org");
 
-    foreach ($echolinksys->messageEmail as $email) { 
-        //set template for email!
-        $body = "Byl změněn stav převaděče.\r\n" .
-                "Call: " . $email["callname"] . "\r\n" .
-                "Nyní stav: " . ($email["newStatus"]==1?"Online":"Offline") . "\r\n" .
-                "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
-                "Datum nynější změny: " . $email["checkDate"] . "\r\n";
 
-        $echolinksys->mail($email["email"], "Echolink", $body, $from_name = "EcholinkSyS");
-        $echolinksys->addHistoryLog("E-mail send to " . $email["callname"]);
-        $app->log->info("Echolink CRON System - Email send to " . $email["callname"]);
+    if ($echolinksys->responseStat) {
+        $app->log->info("Echolink CRON System - Server problem ! (CODE: " . $echolinksys->responseStat . ")");
+        $echolinksys->addHistoryLog("Server response problem! (CODE: " . $echolinksys->responseStat . ")");
     }
-    
+
     $dataArray = array('time' => time(), 'message' => "Run finish");
 
     header("Content-Type: application/json");

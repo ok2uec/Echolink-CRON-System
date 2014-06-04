@@ -59,46 +59,8 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 {{ flash.info|raw }}
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Overview of last update made ​​via cron / manual Update
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                        <thead>
-                                            <tr>
-                                                <th>Date of inspection</th>
-                                                <th>Result</th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
-                                            {% for list in dataHistory %} 
-                                                <tr class="odd gradeX">
-                                                    <td>{{ list.checkDate }}</td>
-                                                    <td>{{ list.text }}</td> 
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                                <div class="well">
-                                    <h4>Info</h4>
-                                    <p>For technical reasons, the History limited to 1000 entries</p>
-                                </div>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
+
                 <!-- /.row -->
                 <div class="row">
 
@@ -139,87 +101,7 @@
                         <!-- /.panel -->
                     </div>
                     <!-- /.col-lg-6 -->
-
-                    <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Add repeaters
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <form role="form" method="post" action="{{ baseUrl() }}/add">
-                                        <div class="form-group">
-                                            <label>Master Passwords</label>
-                                            <input name="masterpassword" type="password" class="form-control">
-                                            <p class="help-block">Required to add repeater</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Callname repeater</label>
-                                            <input name="callname" class="form-control" placeholder="ok2uec">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>E-mail for notification</label>
-                                            <input name="email" type="text" class="form-control">
-                                            <p class="help-block">If you do not want notifications not fill</p>
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Add</button> 
-                                    </form>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-
-                </div>
-                <!-- /.row -->
-
-
-                <!-- /.row -->
-                <div class="row">
-
-                    <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Delete repeater
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <form role="form" method="post" action="{{ baseUrl() }}/delete">
-                                        <div class="form-group">
-                                            <label>Master Passwords</label>
-                                            <input name="masterpassword" type="password" class="form-control">
-                                            <p class="help-block">Required to delete repeater</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Callname repeater</label>
-
-                                            <select name="callname" class="form-control"> 
-                                                {% for list in dataEcholinkRepeater %}  
-                                                    <option value="{{ list.id }}">{{ list.callname }}</option> 
-                                                {% endfor %} 
-                                            </select>
-
-                                        </div>
-
-                                        <button type="submit" class="btn btn-default">Delete</button> 
-                                    </form>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-
-                    <div class="col-lg-6">
+<div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Useful information
@@ -264,6 +146,133 @@
                         </div>
                         <!-- /.panel -->
                     </div>
+                
+
+                </div>
+                <!-- /.row -->
+
+
+
+
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Overview of last update made ​​via cron / manual Update
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Date of inspection</th>
+                                                <th>Result</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for list in dataHistory %} 
+                                                <tr class="odd gradeX">
+                                                    <td>{{ list.checkDate }}</td>
+                                                    <td>{{ list.text }}</td> 
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                                <div class="well">
+                                    <h4>Info</h4>
+                                    <p>For technical reasons, the History limited to 1000 entries</p>
+                                </div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+
+
+                <!-- /.row -->
+                <div class="row">
+
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Delete repeater
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <form role="form" method="post" action="{{ baseUrl() }}/delete">
+                                        <div class="form-group">
+                                            <label>Master Passwords</label>
+                                            <input name="masterpassword" type="password" class="form-control">
+                                            <p class="help-block">Required to delete repeater</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Callname repeater</label>
+
+                                            <select name="callname" class="form-control"> 
+                                                {% for list in dataEcholinkRepeater %}  
+                                                    <option value="{{ list.id }}">{{ list.callname }}</option> 
+                                                {% endfor %} 
+                                            </select>
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-default">Delete</button> 
+                                    </form>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+
+                    
+                        <!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Add repeaters
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <form role="form" method="post" action="{{ baseUrl() }}/add">
+                                        <div class="form-group">
+                                            <label>Master Passwords</label>
+                                            <input name="masterpassword" type="password" class="form-control">
+                                            <p class="help-block">Required to add repeater</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Callname repeater</label>
+                                            <input name="callname" class="form-control" placeholder="ok2uec">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>E-mail for notification</label>
+                                            <input name="email" type="text" class="form-control">
+                                            <p class="help-block">If you do not want notifications not fill</p>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Add</button> 
+                                    </form>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    
+                     
 
                 </div>
                 <!-- /.row -->
