@@ -88,22 +88,23 @@ $app->get('/check', function () use ($app) {
     if ($echolinksys->responseStat != System::RESPONSE_OK) {
         $app->log->info("Echolink CRON System - Server problem ! (CODE: " . $echolinksys->responseStat . ")");
         $echolinksys->addHistoryLog("Server response problem! (CODE: " . $echolinksys->responseStat . ")");
-    }
+    } else {
 
-    $body = "Byl změněn stav převaděče.\r\n" .
-            "Call: ";
-
-    foreach ($echolinksys->messageEmail as $email) {
-        //set template for email!
         $body = "Byl změněn stav převaděče.\r\n" .
-                "Call: " . $email["callname"] . "\r\n" .
-                "Nyní stav: " . ($email["newStatus"] == 1 ? "true" : "false") . "\r\n" .
-                "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
-                "Datum nynější změny: " . $email["checkDate"] . "\r\n";
+                "Call: ";
 
-        $echolinksys->mail($email["email"], "Echolink", $body, $from_name = "EcholinkSyS");
-        $echolinksys->addHistoryLog("E-mail send to " . $email["callname"]);
-        $app->log->info("Echolink CRON System - Email send to " . $email["callname"]);
+        foreach ($echolinksys->messageEmail as $email) {
+            //set template for email!
+            $body = "Byl změněn stav převaděče.\r\n" .
+                    "Call: " . $email["callname"] . "\r\n" .
+                    "Nyní stav: " . ($email["newStatus"] == 1 ? "true" : "false") . "\r\n" .
+                    "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
+                    "Datum nynější změny: " . $email["checkDate"] . "\r\n";
+
+            $echolinksys->mail($email["email"], "Echolink", $body, $from_name = "EcholinkSyS");
+            $echolinksys->addHistoryLog("E-mail send to " . $email["callname"]);
+            $app->log->info("Echolink CRON System - Email send to " . $email["callname"]);
+        }
     }
 
     $url = $app->urlFor('list', array());
@@ -121,9 +122,26 @@ $app->get('/cron', function () use ($app) {
     $app->log->info("Echolink CRON System - CRON -> Update was performed from a remote server echolink.org");
 
 
-    if ($echolinksys->responseStat) {
+    if ($echolinksys->responseStat != System::RESPONSE_OK) {
         $app->log->info("Echolink CRON System - Server problem ! (CODE: " . $echolinksys->responseStat . ")");
         $echolinksys->addHistoryLog("Server response problem! (CODE: " . $echolinksys->responseStat . ")");
+    } else {
+
+        $body = "Byl změněn stav převaděče.\r\n" .
+                "Call: ";
+
+        foreach ($echolinksys->messageEmail as $email) {
+            //set template for email!
+            $body = "Byl změněn stav převaděče.\r\n" .
+                    "Call: " . $email["callname"] . "\r\n" .
+                    "Nyní stav: " . ($email["newStatus"] == 1 ? "true" : "false") . "\r\n" .
+                    "Datum poslední změny: " . $email["oldCheckDate"] . "\r\n" .
+                    "Datum nynější změny: " . $email["checkDate"] . "\r\n";
+
+            $echolinksys->mail($email["email"], "Echolink", $body, $from_name = "EcholinkSyS");
+            $echolinksys->addHistoryLog("E-mail send to " . $email["callname"]);
+            $app->log->info("Echolink CRON System - Email send to " . $email["callname"]);
+        }
     }
 
     $dataArray = array('time' => time(), 'message' => "Run finish");
